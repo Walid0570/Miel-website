@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>l'Arssel - Miels Artisanaux de Qualité</title>
+    <meta name="description" content="Découvrez nos miels artisanaux d'exception, récoltés avec passion et soin. Des saveurs uniques aux multiples bienfaits pour votre santé.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        honey: "#DAA520",
+                        deepred: "#8B0000",
+                        cream: "#FFF5E1"
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Open Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .honey-drip {
+            position: relative;
+        }
+        
+        .honey-drip::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 10px;
+            background: #DAA520;
+            border-radius: 0 0 15px 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .honey-drip:hover::after {
+            opacity: 1;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #8B0000;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="font-body bg-cream text-gray-800 min-h-screen flex flex-col">
+    <!-- Header avec navigation fixe -->
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <a href="#" class="text-2xl font-heading font-bold text-honey">l'Arssel</a>
+                
+                <!-- Menu desktop -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="honey-drip text-deepred hover:text-honey transition-colors">Accueil</a>
+                    <a href="#products" class="honey-drip text-deepred hover:text-honey transition-colors">Miels</a>
+                    <a href="#benefits" class="honey-drip text-deepred hover:text-honey transition-colors">Bienfaits</a>
+                    <a href="#story" class="honey-drip text-deepred hover:text-honey transition-colors">Notre histoire</a>
+                    <a href="#contact" class="honey-drip text-deepred hover:text-honey transition-colors">Contact</a>
+                </div>
+                
+                <!-- Panier -->
+                <div class="relative">
+                    <button id="cart-btn" class="text-deepred hover:text-honey transition-colors">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </button>
+                </div>
+                
+                <!-- Menu hamburger mobile -->
+                <button id="menu-toggle" class="md:hidden text-deepred">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </nav>
+            
+            <!-- Menu mobile -->
+            <div id="mobile-menu" class="hidden md:hidden py-4 border-t border-cream">
+                <div class="flex flex-col space-y-4">
+                    <a href="#" class="honey-drip text-deepred hover:text-honey transition-colors">Accueil</a>
+                    <a href="#products" class="honey-drip text-deepred hover:text-honey transition-colors">Miels</a>
+                    <a href="#benefits" class="honey-drip text-deepred hover:text-honey transition-colors">Bienfaits</a>
+                    <a href="#story" class="honey-drip text-deepred hover:text-honey transition-colors">Notre histoire</a>
+                    <a href="#contact" class="honey-drip text-deepred hover:text-honey transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <!-- Hero section -->
+        <section class="relative h-96 flex items-center justify-center">
+            <img src="https://picsum.photos/1600/900?random=1" alt="Ruche et pots de miel artisanaux" class="absolute inset-0 w-full h-full object-cover opacity-40">
+            <div class="container mx-auto px-4 text-center z-10 fade-in">
+                <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl text-deepred mb-4">Le nectar doré de la nature</h1>
+                <p class="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto">Découvrez nos miels d'exception, récoltés avec passion pour éveiller vos sens</p>
+                <a href="#products" class="inline-block mt-8 px-8 py-3 bg-honey text-white rounded-full hover:bg-deepred transition-colors">Découvrir</a>
+            </div>
+        </section>
+
+        <!-- Section produits -->
+        <section id="products" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="font-heading text-3xl md:text-4xl text-center text-deepred mb-12">Nos Miels d'Exception</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Produit 1 -->
+                    <div class="bg-cream rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 slide-in">
+                        <img src="image/lavande.png" alt="Miel de Lavande" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-deepred mb-2">Miel de Lavande</h3>
+                            <p class="text-gray-600 mb-4">Un miel délicat aux arômes floraux et notes douces de Provence.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-honey font-bold text-xl">12,90 €</span>
+                                <button class="add-to-cart bg-honey text-white px-4 py-2 rounded hover:bg-deepred transition-colors" data-id="1" data-name="Miel de Lavande" data-price="12.90">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 2 -->
+                    <div class="bg-cream rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 slide-in">
+                        <img src="image/foret.png" alt="Miel de Forêt" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-deepred mb-2">Miel de Forêt</h3>
+                            <p class="text-gray-600 mb-4">Un miel robuste aux saveurs boisées et notes de résine.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-honey font-bold text-xl">14,50 €</span>
+                                <button class="add-to-cart bg-honey text-white px-4 py-2 rounded hover:bg-deepred transition-colors" data-id="2" data-name="Miel de Forêt" data-price="14.50">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 3 -->
+                    <div class="bg-cream rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 slide-in">
+                        <img src="image/acacia.png" alt="Miel d'Acacia" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-deepred mb-2">Miel d'Acacia</h3>
+                            <p class="text-gray-600 mb-4">Un miel liquide et clair au goût subtil et délicatement sucré.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-honey font-bold text-xl">13,20 €</span>
+                                <button class="add-to-cart bg-honey text-white px-4 py-2 rounded hover:bg-deepred transition-colors" data-id="3" data-name="Miel d'Acacia" data-price="13.20">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 4 -->
+                    <div class="bg-cream rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 slide-in">
+                        <img src="image/romarin.png" alt="Miel de Romarin" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-deepred mb-2">Miel de Romarin</h3>
+                            <p class="text-gray-600 mb-4">Un miel rare aux arômes herbacés et notes légèrement mentholées.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-honey font-bold text-xl">15,75 €</span>
+                                <button class="add-to-cart bg-honey text-white px-4 py-2 rounded hover:bg-deepred transition-colors" data-id="4" data-name="Miel de Romarin" data-price="15.75">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 5 -->
+                    <div class="bg-cream rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 slide-in">
+                        <img src="image/châtaigner.png" alt="Miel de Châtaignier" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-deepred mb-2">Miel de Châtaignier</h3>
+                            <p class="text-gray-600 mb-4">Un miel corsé au goût robuste et légèrement tannique.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-honey font-bold text-xl">16,30 €</span>
+                                <button class="add-to-cart bg-honey text-white px-4 py-2 rounded hover:bg-deepred transition-colors" data-id="5" data-name="Miel de Châtaignier" data-price="16.30">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 6 -->
+                    <div class="bg-cream rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 slide-in">
+                        <img src="image/tilleul.png" alt="Miel de Tilleul" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-heading text-xl text-deepred mb-2">Miel de Tilleul</h3>
+                            <p class="text-gray-600 mb-4">Un miel doux aux arômes mentholés et notes balsamiques.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-honey font-bold text-xl">12,50 €</span>
+                                <button class="add-to-cart bg-honey text-white px-4 py-2 rounded hover:bg-deepred transition-colors" data-id="6" data-name="Miel de Tilleul" data-price="12.50">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section bienfaits -->
+        <section id="benefits" class="py-16 bg-cream">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                        <h2 class="font-heading text-3xl md:text-4xl text-deepred mb-6">Les Bienfaits du Miel</h2>
+                        <p class="text-gray-700 mb-4">Notre miel artisanal est bien plus qu'un simple édulcorant naturel. Riche en antioxydants, enzymes et nutriments essentiels, il offre de nombreux bienfaits pour votre santé :</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>Renforce le système immunitaire</li>
+                            <li>Adoucit les maux de gorge et calme la toux</li>
+                            <li>Favorise la digestion et soulage les troubles gastriques</li>
+                            <li>Source d'énergie naturelle et durable</li>
+                            <li>Propriétés antibactériennes et antifongiques</li>
+                            <li>Contribue à une peau saine et radieuse</li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="image/honey.png" alt="Bienfaits du miel pour la santé" class="rounded-lg shadow-lg w-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section notre histoire -->
+        <section id="story" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0 order-2 md:order-1">
+                        <img src="https://images.pexels.com/photos/338936/pexels-photo-338936.jpeg?cs=srgb&dl=pexels-nejc-kosir-108379-338936.jpg&fm=jpg" alt="Notre histoire et passion pour l'apiculture" class="rounded-lg shadow-lg w-full">
+                    </div>
+                    <div class="md:w-1/2 md:pl-8 order-1 md:order-2">
+                        <h2 class="font-heading text-3xl md:text-4xl text-deepred mb-6">Notre Histoire</h2>
+                        <p class="text-gray-700 mb-4">L'aventure l'Arssel a commencé il y a trois générations, lorsque notre arrière-grand-père a installé ses premières ruches dans les collines provençales. Passionné par le monde des abeilles et fasciné par leur travail minutieux, il a transmis son amour pour l'apiculture à toute notre famille.</p>
+                        <p class="text-gray-700 mb-4">Aujourd'hui, nous perpétuons cette tradition avec le même respect pour la nature et les abeilles. Chaque pot de miel l'Arssel est le fruit d'un travail patient et respectueux de l'environnement, depuis la floraison jusqu'à la mise en pot.</p>
+                        <p class="text-gray-700">Notre engagement : vous offrir des miels purs, non pasteurisés et riches de tous leurs bienfaits, pour que vous puissiez savourer l'authentique goût de la nature.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section contact -->
+        <section id="contact" class="py-16 bg-cream">
+            <div class="container mx-auto px-4">
+                <h2 class="font-heading text-3xl md:text-4xl text-center text-deepred mb-12">Contactez-nous</h2>
+                
+                <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                    <form id="contact-form">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 mb-2">Nom complet</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-honey">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 mb-2">Adresse email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-honey">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-700 mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-honey"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-honey text-white py-3 rounded hover:bg-deepred transition-colors">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-deepred text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="font-heading text-xl mb-4">l'Arssel</h3>
+                    <p>Des miels artisanaux d'exception, récoltés avec passion pour votre plus grand plaisir.</p>
+                </div>
+                <div>
+                    <h3 class="font-heading text-xl mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-honey transition-colors">Accueil</a></li>
+                        <li><a href="#products" class="hover:text-honey transition-colors">Nos miels</a></li>
+                        <li><a href="#benefits" class="hover:text-honey transition-colors">Bienfaits</a></li>
+                        <li><a href="#story" class="hover:text-honey transition-colors">Notre histoire</a></li>
+                        <li><a href="#contact" class="hover:text-honey transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-heading text-xl mb-4">Suivez-nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-honey transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-white hover:text-honey transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-white hover:text-honey transition-colors"><i class="fab fa-pinterest-p text-xl"></i></a>
+                        <a href="#" class="text-white hover:text-honey transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    </div>
+                    <p class="mt-4">walidbekka345@gmail.com</p>
+                    <p>+33 1 23 45 67 89</p>
+                </div>
+            </div>
+            <div class="border-t border-honey mt-8 pt-8 text-center">
+                <p>&copy; 2023 l'Arssel - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Panier modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="absolute right-0 top-0 h-full w-full md:w-96 bg-white shadow-lg overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-heading text-2xl text-deepred">Votre Panier</h3>
+                    <button id="close-cart" class="text-gray-500 hover:text-deepred">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div id="cart-items" class="mb-6">
+                    <!-- Les articles du panier seront ajoutés ici dynamiquement -->
+                    <p id="empty-cart-message" class="text-center text-gray-500 py-8">Votre panier est vide</p>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4 mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold">Total:</span>
+                        <span id="cart-total" class="font-bold text-honey text-xl">0,00 €</span>
+                    </div>
+                </div>
+                
+                <button id="checkout-btn" class="w-full bg-honey text-white py-3 rounded hover:bg-deepred transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    Procéder au paiement
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données des produits
+        const products = [
+            { id: 1, name: "Miel de Lavande", price: 12.90, image: "image/lavande.png" },
+            { id: 2, name: "Miel de Forêt", price: 14.50, image: "image/foret.png" },
+            { id: 3, name: "Miel d'Acacia", price: 13.20, image: "image/acacia.png" },
+            { id: 4, name: "Miel de Romarin", price: 15.75, image: "image/romarin.png" },
+            { id: 5, name: "Miel de Châtaignier", price: 16.30, image: "image/châtaigner.png" },
+            { id: 6, name: "Miel de Tilleul", price: 12.50, image: "image/tilleul.png" }
+        ];
+
+        // Panier
+        let cart = [];
+        
+        // Éléments DOM
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const cartBtn = document.getElementById('cart-btn');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCart = document.getElementById('close-cart');
+        const cartCount = document.getElementById('cart-count');
+        const cartItems = document.getElementById('cart-items');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const cartTotal = document.getElementById('cart-total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const contactForm = document.getElementById('contact-form');
+        
+        // Menu mobile
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Ouvrir le panier
+        cartBtn.addEventListener('click', () => {
+            cartModal.classList.remove('hidden');
+            updateCartDisplay();
+        });
+        
+        // Fermer le panier
+        closeCart.addEventListener('click', () => {
+            cartModal.classList.add('hidden');
+        });
+        
+        // Fermer le panier en cliquant à l'extérieur
+        cartModal.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.classList.add('hidden');
+            }
+        });
+        
+        // Ajouter au panier
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                const product = products.find(p => p.id === id);
+                
+                // Vérifier si le produit est déjà dans le panier
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCartCount();
+                
+                // Animation de confirmation
+                e.target.innerHTML = 'Ajouté !';
+                e.target.classList.add('bg-deepred');
+                
+                setTimeout(() => {
+                    e.target.innerHTML = 'Ajouter au panier';
+                    e.target.classList.remove('bg-deepred');
+                    e.target.classList.add('bg-honey');
+                }, 1500);
+            });
+        });
+        
+        // Mettre à jour le compteur du panier
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+        
+        // Mettre à jour l'affichage du panier
+        function updateCartDisplay() {
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                cartItems.innerHTML = '';
+                checkoutBtn.disabled = true;
+                cartTotal.textContent = '0,00 €';
+                return;
+            }
+            
+            emptyCartMessage.classList.add('hidden');
+            checkoutBtn.disabled = false;
+            
+            let itemsHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                itemsHTML += `
+                    <div class="flex items-center py-4 border-b border-gray-200">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
+                        <div class="ml-4 flex-grow">
+                            <h4 class="font-semibold">${item.name}</h4>
+                            <p class="text-honey font-bold">${item.price.toFixed(2)} €</p>
+                        </div>
+                        <div class="flex items-center">
+                            <button class="decrease-quantity text-gray-500 hover:text-deepred" data-id="${item.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="increase-quantity text-gray-500 hover:text-deepred" data-id="${item.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="remove-item text-red-500 hover:text-red-700 ml-4" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = itemsHTML;
+            cartTotal.textContent = `${total.toFixed(2)} €`;
+            
+            // Ajouter les événements pour les boutons de quantité
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.closest('button').dataset.id);
+                    const item = cart.find(item => item.id === id);
+                    item.quantity += 1;
+                    updateCartDisplay();
+                    updateCartCount();
+                });
+            });
+            
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.closest('button').dataset.id);
+                    const item = cart.find(item => item.id === id);
+                    
+                    if (item.quantity > 1) {
+                        item.quantity -= 1;
+                    } else {
+                        cart = cart.filter(item => item.id !== id);
+                    }
+                    
+                    updateCartDisplay();
+                    updateCartCount();
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.closest('button').dataset.id);
+                    cart = cart.filter(item => item.id !== id);
+                    updateCartDisplay();
+                    updateCartCount();
+                });
+            });
+        }
+        
+        // Validation du formulaire de contact
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !message) {
+                alert('Veuillez remplir tous les champs du formulaire.');
+                return;
+            }
+            
+            // Ici, vous ajouteriez normalement le code pour envoyer le formulaire
+            alert('Merci pour votre message ! Nous vous répondrons très rapidement.');
+            contactForm.reset();
+        });
+        
+        // Animation au défilement
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.slide-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                
+                if (elementTop < window.innerHeight - 100 && elementBottom > 0) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initialiser les animations
+        document.querySelectorAll('.slide-in').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        // Déclencher une première fois au chargement
+        setTimeout(animateOnScroll, 100);
+    </script>
+</body>
+</html>
